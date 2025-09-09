@@ -1,0 +1,2 @@
+- Include the medium fidelity prototype of the user interface design for Construction Alert Notification System website, a preview version through pdf file and an interactive version through pptx file.
+- For the overview of the project, please check the Project Presentation files.
