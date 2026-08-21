@@ -64,13 +64,98 @@
   <div style="display:flex; gap:12px; flex:1;">
   <input id="password" name="password" type="password" autocomplete="current-password" required
          style="display:flex; padding: 5px 0; border:0; border-bottom:1px solid #ccc; background:transparent; outline:none;">
+  <!-- Show/Hide Password -->
+  <button type="button" id="togglePw"
+            aria-label="Show password" aria-pressed="false"
+            style="display: inline-flex; align-items: center; 
+                  background:none; border:0; cursor:pointer; padding:4px; line-height:0;">
+  <!-- Open eye icon by default-->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+  </svg>
+  </button>
   </div>
+  <!-- Show password script -->
+  <script>
+  const input = document.getElementById('password');
+  const btn   = document.getElementById('togglePw');
+
+  const eyeOpen = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+    </svg>`;
+
+  const eyeOff = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+      <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"/>
+    </svg>`;
+
+  btn.addEventListener('click', () => {
+    const show = input.type === 'password';
+    input.type = show ? 'text' : 'password';
+    btn.setAttribute('aria-pressed', show ? 'true' : 'false');
+    btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    btn.innerHTML = show ? eyeOff : eyeOpen;
+  });
+</script>
   <label for="confirm_password" style="display:flex; margin:12px 0 4px;">Confirm Password:</label>
   <div style="display:flex; gap:12px; flex:1;">
   <input id="confirm_password" name="confirm_password" type="password" required
          style="display:flex; padding: 5px 0; border:0; border-bottom:1px solid #ccc; background:transparent; outline:none;">
-
+  <!-- Show/Hide Password -->
+  <button type="button" id="togglePw1"
+            aria-label="Show password" aria-pressed="false"
+            style="display: inline-flex; align-items: center; 
+                  background:none; border:0; cursor:pointer; padding:4px; line-height:0;">
+  <!-- Open eye icon by default-->
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+  </svg>
+  </button>
   </div>
+  <!-- Show password script -->
+  <script>
+  const input1 = document.getElementById('confirm_password');
+  const btn1   = document.getElementById('togglePw1');
+
+  const eyeOpen1 = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+    </svg>`;
+
+  const eyeOff1 = `
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+         xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12Z"
+            stroke="currentColor" stroke-width="2"/>
+      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+      <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" stroke-width="2"/>
+    </svg>`;
+
+  btn1.addEventListener('click', () => {
+    const show = input1.type === 'password';
+    input1.type = show ? 'text' : 'password';
+    btn1.setAttribute('aria-pressed', show ? 'true' : 'false');
+    btn1.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    btn1.innerHTML = show ? eyeOff1 : eyeOpen1;
+  });
+</script>
   <p id="message" style="color:red; font-size:0.9em; margin-top:6px;"></p>
   <button href="Login.html" style="margin-top:12px;">Submit</button>
   <!-- Confirm password script-->

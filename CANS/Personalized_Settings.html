@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personalized Settings - Construction Alert Notification System</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffffff;
+      color: #595959;
+    }
+
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      padding-top: 30px;
+    }
+
+    h1 {
+      margin: 0.67em 0;
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: center;
+      gap: 140px;
+      padding: 20px;
+    }
+
+    .nav-bar a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    .nav-bar a:hover {
+      color: blue;
+      cursor: pointer;
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 420px minmax(520px, 1fr);
+      column-gap: 58px;
+      margin-top: 42px;
+      align-items: start;
+    }
+
+    .map-section label {
+      display: block;
+      margin-bottom: 44px;
+      font-size: 17px;
+    }
+
+    .map-wrapper {
+      width: 372px;
+      height: 232px;
+      overflow: hidden;
+    }
+
+    .map-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .settings-form {
+      max-width: 545px;
+      padding-top: 15px;
+    }
+
+    .section-title {
+      margin-bottom: 2px;
+      font-size: 17px;
+    }
+
+    .days {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 68px;
+    }
+
+    .day-option {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      min-width: 62px;
+    }
+
+    .day-option span {
+      font-size: 17px;
+      text-decoration: none;
+    }
+
+    input[type="checkbox"] {
+      width: 26px;
+      height: 23px;
+      margin: 0;
+      accent-color: #d9d9d9;
+    }
+
+    .time-title {
+      margin-bottom: 0;
+      font-size: 17px;
+    }
+
+    .time-row {
+      display: grid;
+      grid-template-columns: auto 157px auto 157px;
+      column-gap: 20px;
+      align-items: center;
+      margin-bottom: 55px;
+    }
+
+    .time-row label {
+      font-size: 17px;
+    }
+
+    input[type="time"],
+    input[type="email"],
+    input[type="tel"] {
+      height: 22px;
+      border: 1px solid #777;
+      border-radius: 4px;
+      background: #f7f7f7;
+      padding: 2px 8px;
+      font: inherit;
+      color: #333;
+    }
+
+    .notification-title {
+      margin-bottom: 20px;
+      font-size: 17px;
+    }
+
+    .notification-row {
+      display: grid;
+      grid-template-columns: 36px 55px 1fr;
+      align-items: center;
+      column-gap: 12px;
+      margin: 20px 12px;
+    }
+
+    .notification-row label {
+      font-size: 17px;
+    }
+
+    .notification-row input[type="email"],
+    .notification-row input[type="tel"] {
+      width: 100%;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 38px;
+      margin-left: 105px;
+    }
+
+    .back-button,
+    .submit-button {
+      min-width: 158px;
+      height: 58px;
+      border: 1px solid #666;
+      border-radius: 10px;
+      background: #f7f7f7;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .back-button {
+      color: #333;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .back-button:hover {
+      color: blue;
+    }
+
+    .submit-button {
+      font-size: 24px;
+      color: #111;
+    }
+
+    .back-button:hover,
+    .submit-button:hover {
+      background: #ededed;
+    }
+
+    @media (max-width: 950px) {
+      .page {
+        padding: 30px 20px;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
+        row-gap: 35px;
+      }
+
+      .map-section,
+      .settings-form {
+        margin: 0 auto;
+        width: min(100%, 600px);
+      }
+
+      .map-wrapper {
+        width: 100%;
+        max-width: 500px;
+      }
+
+      .days {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .time-row {
+        grid-template-columns: auto 1fr;
+        row-gap: 12px;
+      }
+
+      .buttons {
+        margin-left: 0;
+        gap: 20px;
+      }
+    }
+  </style>
+
+  <script>
+    // This static-page guard allows entry only after the user clicks
+    // Personalized Settings from Homepage_Login.html.
+    if (sessionStorage.getItem('personalizedAccess') !== '1') {
+      window.location.replace('Homepage_Login.html');
+    } else {
+      // Consume the one-time access flag so direct reopening of this page
+      // redirects back to the logged-in homepage.
+      sessionStorage.removeItem('personalizedAccess');
+    }
+  </script>
+</head>
+<body>
+  <div class="page">
+    <h1>Construction Alert Notification System</h1>
+    <div class="subtitle"><p>Road Construction Information For Greater Victoria Region</p></div>
+
+    <nav class="nav-bar" aria-label="Main navigation">
+      <a href="Homepage_Login.html">Home</a>
+      <a href="Under_Construction_Login.html">News</a>
+      <a href="Under_Construction_Login.html">About Us</a>
+      <a href="Personalized_Settings.html" onclick="sessionStorage.setItem('personalizedAccess', '1')">Personalized Settings</a>
+      <a>My Account</a>
+    </nav>
+
+    <main class="content">
+      <section class="map-section">
+        <label>Enter Daily Commute:</label>
+        <div class="map-wrapper">
+          <iframe
+            src="https://www.google.com/maps?q=Victoria,+BC&output=embed"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Greater Victoria commute map">
+          </iframe>
+        </div>
+      </section>
+
+      <form class="settings-form" action="Homepage_Login.html" method="get">
+        <div class="section-title">What days do you commute:</div>
+        <div class="days">
+          <label class="day-option"><span>Monday</span><input type="checkbox" name="days" value="Monday"></label>
+          <label class="day-option"><span>Tuesday</span><input type="checkbox" name="days" value="Tuesday"></label>
+          <label class="day-option"><span>Wednesday</span><input type="checkbox" name="days" value="Wednesday"></label>
+          <label class="day-option"><span>Thursday</span><input type="checkbox" name="days" value="Thursday"></label>
+          <label class="day-option"><span>Friday</span><input type="checkbox" name="days" value="Friday"></label>
+          <label class="day-option"><span>Saturday</span><input type="checkbox" name="days" value="Saturday"></label>
+          <label class="day-option"><span>Sunday</span><input type="checkbox" name="days" value="Sunday"></label>
+        </div>
+
+        <div class="time-title">Time Frame:</div>
+        <div class="time-row">
+          <label for="depart">Depart:</label>
+          <input id="depart" name="depart" type="time">
+          <label for="arrival">Arrival:</label>
+          <input id="arrival" name="arrival" type="time">
+        </div>
+
+        <div class="notification-title">Notification:</div>
+        <div class="notification-row">
+          <input id="emailEnabled" name="emailEnabled" type="checkbox" value="1">
+          <label for="email">Email:</label>
+          <input id="email" name="email" type="email" autocomplete="email">
+        </div>
+
+        <div class="notification-row">
+          <input id="textEnabled" name="textEnabled" type="checkbox" value="1">
+          <label for="phone">Text:</label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel">
+        </div>
+
+        <div class="buttons">
+          <button class="back-button" type="button" onclick="window.location.href='Homepage_Login.html'">Go Back</button>
+          <button class="submit-button" type="submit">Submit</button>
+        </div>
+      </form>
+    </main>
+  </div>
+</body>
+</html>
